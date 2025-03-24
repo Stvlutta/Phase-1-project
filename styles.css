@@ -71,3 +71,8 @@ header h1 {
     cursor: pointer;
     font-size: 16px;
 }
+
+/* Main Content */
+main {
+    padding: 30px 0;
+}
