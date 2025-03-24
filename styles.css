@@ -4,3 +4,18 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+:root {
+    --primary-color: #032541;
+    --secondary-color: #01b4e4;
+    --dark-color: #111;
+    --light-color: #f4f4f4;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
