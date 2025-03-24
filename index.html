@@ -26,8 +26,62 @@
                     <label for="genre-filter">Genre:</label>
                     <select id="genre-filter">
                         <option value="">All Genres</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-filter">Year:</label>
+                    <select id="year-filter">
+                        <option value="">All Years</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating-filter">Min Rating:</label>
+                    <select id="rating-filter">
+                        <option value="">Any Rating</option>
+                        <option value="7">7+</option>
+                        <option value="8">8+</option>
+                        <option value="9">9+</option>
+                    </select>
+                </div>
+                <button id="filter-button">Apply Filters</button>
+            </div>
 
+            <div class="tabs">
+                <button class="tab-button active" data-tab="discover">Discover</button>
+                <button class="tab-button" data-tab="watchlist">My Watchlist</button>
+            </div>
 
-  <script src="./script.js"></script>  
+            <div class="tab-content active" id="discover-content">
+                <div id="movie-container" class="movie-grid"></div>
+                <div id="pagination">
+                    <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                    <span id="current-page">Page 1</span>
+                    <button id="next-page">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="watchlist-content">
+                <div id="watchlist-container" class="movie-grid"></div>
+                <div id="empty-watchlist">
+                    <p>Your watchlist is empty. Start adding movies!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Movie Finder &copy; 2025 | Powered by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB API</a></p>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>  
 </body>
 </html>
