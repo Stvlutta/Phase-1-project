@@ -426,3 +426,20 @@ footer {
     padding: 20px 0;
     text-align: center;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .movie-detail {
+        flex-direction: column;
+    }
+
+    .movie-poster-lg {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
