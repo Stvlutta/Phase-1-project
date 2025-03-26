@@ -22,3 +22,14 @@ const currentPageSpan = document.getElementById('current-page');
 const movieModal = document.getElementById('movie-modal');
 const modalContent = document.getElementById('modal-content');
 const closeModalButton = document.querySelector('.close');
+
+// State variables
+let currentPage = 1;
+let totalPages = 1;
+let currentSearchQuery = '';
+let currentGenre = '';
+let currentYear = '';
+let currentRating = '';
+let movies = [];
+let genres = [];
+let watchlist = [];
