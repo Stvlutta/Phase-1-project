@@ -111,3 +111,18 @@ async function loadGenres() {
         console.error('Error loading genres:', error);
     }
 }
+
+// Load trending movies
+async function loadTrendingMovies() {
+    try {
+        const response = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
+        const data = await response.json();
+        
+        movies = data.results;
+        totalPages = data.total_pages;
+        renderMovies();
+        updatePagination();
+    } catch (error) {
+        console.error('Error loading trending movies:', error);
+    }
+}
