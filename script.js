@@ -47,3 +47,22 @@ closeModalButton.addEventListener('click', closeModal);
 window.addEventListener('click', e => {
     if (e.target === movieModal) closeModal();
 });
+
+// Tab navigation
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        button.classList.add('active');
+        const tabContentId = button.getAttribute('data-tab') + '-content';
+        document.getElementById(tabContentId).classList.add('active');
+        
+        // Update watchlist if needed
+        if (button.getAttribute('data-tab') === 'watchlist') {
+            renderWatchlist();
+        }
+    });
+});
