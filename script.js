@@ -92,3 +92,22 @@ function populateYearFilter() {
         yearFilter.appendChild(option);
     }
 }
+
+// Load genres from API
+async function loadGenres() {
+    try {
+        const response = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+        const data = await response.json();
+        genres = data.genres;
+        
+        // Populate genre filter dropdown
+        genres.forEach(genre => {
+            const option = document.createElement('option');
+            option.value = genre.id;
+            option.textContent = genre.name;
+            genreFilter.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error loading genres:', error);
+    }
+}
