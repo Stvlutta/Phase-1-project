@@ -66,3 +66,19 @@ tabButtons.forEach(button => {
         }
     });
 });
+
+// Initialize application
+async function initializeApp() {
+    // Load genres
+    await loadGenres();
+    
+    // Populate year filter (from current year back to 1950)
+    populateYearFilter();
+    
+    // Load watchlist from localStorage
+    loadWatchlist();
+    
+    // Load trending movies initially
+    loadTrendingMovies();
+}
+
