@@ -33,3 +33,17 @@ let currentRating = '';
 let movies = [];
 let genres = [];
 let watchlist = [];
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', initializeApp);
+searchButton.addEventListener('click', handleSearch);
+searchInput.addEventListener('keyup', e => {
+    if (e.key === 'Enter') handleSearch();
+});
+filterButton.addEventListener('click', applyFilters);
+prevPageButton.addEventListener('click', goToPrevPage);
+nextPageButton.addEventListener('click', goToNextPage);
+closeModalButton.addEventListener('click', closeModal);
+window.addEventListener('click', e => {
+    if (e.target === movieModal) closeModal();
+});
