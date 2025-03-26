@@ -82,3 +82,13 @@ async function initializeApp() {
     loadTrendingMovies();
 }
 
+// Populate year filter dropdown
+function populateYearFilter() {
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear; year >= 1950; year--) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearFilter.appendChild(option);
+    }
+}
