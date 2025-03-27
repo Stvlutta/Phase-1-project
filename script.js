@@ -279,3 +279,16 @@ function renderWatchlist() {
             </div>
         `;
         
+        // Add event listeners
+        movieCard.querySelector('.movie-poster').addEventListener('click', () => openMovieDetail(movie.id));
+        movieCard.querySelector('.movie-title').addEventListener('click', () => openMovieDetail(movie.id));
+        movieCard.querySelector('.watchlist-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleWatchlist(movie);
+            renderWatchlist();
+        });
+        
+        // Append to container
+        watchlistContainer.appendChild(movieCard);
+    });
+}
