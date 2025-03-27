@@ -191,7 +191,6 @@ function renderMovies() {
         movieContainer.innerHTML = '<p class="no-results">No movies found matching your criteria.</p>';
         return;
     }
-}
 
 // Create movie cards
 movies.forEach(movie => {
@@ -222,5 +221,24 @@ movies.forEach(movie => {
             </button>
             </div>
         `;
+    
+    // Add event listeners to the movie card
+    movieCard.querySelector('.movie-poster').addEventListener('click', () => openMovieDetail(movie.id));
+    movieCard.querySelector('.movie-title').addEventListener('click', () => openMovieDetail(movie.id));
+    movieCard.querySelector('.watchlist-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleWatchlist(movie);
+        const button = e.currentTarget;
+        if (button.classList.contains('in-watchlist')) {
+            button.classList.remove('in-watchlist');
+            button.innerHTML = '<i class="fas fa-plus"></i> Add to Watchlist';
+        } else {
+            button.classList.add('in-watchlist');
+            button.innerHTML = '<i class="fas fa-check"></i> In Watchlist';
+        }
     });
     
+    // Append to container
+    movieContainer.appendChild(movieCard);
+});
+}
