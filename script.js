@@ -192,3 +192,35 @@ function renderMovies() {
         return;
     }
 }
+
+// Create movie cards
+movies.forEach(movie => {
+    const inWatchlist = watchlist.some(item => item.id === movie.id);
+    
+    // Create movie card
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
+    
+    // Create poster
+    const posterPath = movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : DEFAULT_POSTER;
+    
+    // Build movie card HTML
+    movieCard.innerHTML = `
+        <img src="${posterPath}" alt="${movie.title}" class="movie-poster">
+        <div class="movie-info">
+            <h3 class="movie-title">${movie.title}</h3>
+            <div class="movie-rating">
+                <i class="fas fa-star"></i>
+                <span>${movie.vote_average.toFixed(1)}</span>
+            </div>
+            <div class="movie-year">
+                ${movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A'}
+            </div>
+            <button class="watchlist-btn ${inWatchlist ? 'in-watchlist' : ''}">
+                <i class="fas ${inWatchlist ? 'fa-check' : 'fa-plus'}"></i>
+                ${inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+            </button>
+            </div>
+        `;
+    });
+    
