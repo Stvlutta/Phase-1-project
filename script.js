@@ -126,3 +126,24 @@ async function loadTrendingMovies() {
         console.error('Error loading trending movies:', error);
     }
 }
+
+// Handle search
+async function handleSearch() {
+    const query = searchInput.value.trim();
+    if (!query) return;
+    
+    currentSearchQuery = query;
+    currentPage = 1;
+    
+    try {
+        const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`);
+        const data = await response.json();
+        
+        movies = data.results;
+        totalPages = data.total_pages;
+        renderMovies();
+        updatePagination();
+    } catch (error) {
+        console.error('Error searching movies:', error);
+    }
+}
