@@ -253,3 +253,29 @@ function renderWatchlist() {
     }
     
     emptyWatchlist.style.display = 'none';
+
+    // Create movie cards for watchlist
+    watchlist.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.classList.add('movie-card');
+        
+        const posterPath = movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : DEFAULT_POSTER;
+        
+        movieCard.innerHTML = `
+            <img src="${posterPath}" alt="${movie.title}" class="movie-poster">
+            <div class="movie-info">
+                <h3 class="movie-title">${movie.title}</h3>
+                <div class="movie-rating">
+                    <i class="fas fa-star"></i>
+                    <span>${movie.vote_average.toFixed(1)}</span>
+                </div>
+                <div class="movie-year">
+                    ${movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A'}
+                </div>
+                <button class="watchlist-btn in-watchlist">
+                    <i class="fas fa-trash"></i>
+                    Remove
+                </button>
+            </div>
+        `;
+        
