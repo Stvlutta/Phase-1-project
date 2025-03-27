@@ -181,3 +181,14 @@ async function applyFilters() {
         console.error('Error applying filters:', error);
     }
 }
+
+// Render movies in the grid
+function renderMovies() {
+    // Clear container
+    movieContainer.innerHTML = '';
+    
+    if (movies.length === 0) {
+        movieContainer.innerHTML = '<p class="no-results">No movies found matching your criteria.</p>';
+        return;
+    }
+}
