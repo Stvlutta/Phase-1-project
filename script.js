@@ -147,3 +147,37 @@ async function handleSearch() {
         console.error('Error searching movies:', error);
     }
 }
+
+// Apply filters
+async function applyFilters() {
+    currentGenre = genreFilter.value;
+    currentYear = yearFilter.value;
+    currentRating = ratingFilter.value;
+    currentPage = 1;
+    
+    let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${currentPage}&sort_by=popularity.desc`;
+    
+    if (currentGenre) {
+        url += `&with_genres=${currentGenre}`;
+    }
+    
+    if (currentYear) {
+        url += `&primary_release_year=${currentYear}`;
+    }
+    
+    if (currentRating) {
+        url += `&vote_average.gte=${currentRating}`;
+    }
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        movies = data.results;
+        totalPages = data.total_pages;
+        renderMovies();
+        updatePagination();
+    } catch (error) {
+        console.error('Error applying filters:', error);
+    }
+}
