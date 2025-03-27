@@ -242,3 +242,14 @@ movies.forEach(movie => {
     movieContainer.appendChild(movieCard);
 });
 }
+
+// Render watchlist
+function renderWatchlist() {
+    watchlistContainer.innerHTML = '';
+    
+    if (watchlist.length === 0) {
+        emptyWatchlist.style.display = 'block';
+        return;
+    }
+    
+    emptyWatchlist.style.display = 'none';
