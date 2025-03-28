@@ -292,3 +292,19 @@ function renderWatchlist() {
         watchlistContainer.appendChild(movieCard);
     });
 }
+
+// Toggle movie in watchlist
+function toggleWatchlist(movie) {
+    const index = watchlist.findIndex(item => item.id === movie.id);
+    
+    if (index === -1) {
+        // Add to watchlist
+        watchlist.push(movie);
+    } else {
+        // Remove from watchlist
+        watchlist.splice(index, 1);
+    }
+    
+    // Save to localStorage
+    saveWatchlist();
+}
