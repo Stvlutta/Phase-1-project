@@ -400,3 +400,29 @@ async function openMovieDetail(movieId) {
         console.error('Error loading movie details:', error);
     }
 }
+
+// Close movie detail modal
+function closeModal() {
+    movieModal.style.display = 'none';
+}
+
+// Pagination functions
+function updatePagination() {
+    currentPageSpan.textContent = `Page ${currentPage}`;
+    prevPageButton.disabled = currentPage === 1;
+    nextPageButton.disabled = currentPage === totalPages;
+}
+
+function goToPrevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        loadPageData();
+    }
+}
+
+function goToNextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        loadPageData();
+    }
+}
