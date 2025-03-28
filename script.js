@@ -321,3 +321,60 @@ function loadWatchlist() {
         watchlist = JSON.parse(saved);
     }
 }
+
+// Open movie detail modal
+async function openMovieDetail(movieId) {
+    try {
+        const response = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&append_to_response=credits`);
+        const movie = await response.json();
+        
+        // Check if movie is in watchlist
+        const inWatchlist = watchlist.some(item => item.id === movie.id);
+        
+        // Format runtime to hours and minutes
+        const hours = Math.floor(movie.runtime / 60);
+        const minutes = movie.runtime % 60;
+        const formattedRuntime = `${hours}h ${minutes}m`;
+        
+        // Get directors
+        const directors = movie.credits.crew.filter(person => person.job === 'Director').map(director => director.name).join(', ');
+        
+        // Create modal content
+        modalContent.innerHTML = `
+            <div class="movie-detail">
+                <img src="${movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : DEFAULT_POSTER}" alt="${movie.title}" class="movie-poster-lg">
+                <div class="movie-detail-info">
+                    <h2 class="movie-detail-title">${movie.title}</h2>
+                    <div class="movie-detail-rating">
+                        <i class="fas fa-star"></i>
+                        <span>${movie.vote_average.toFixed(1)}</span>
+                    </div>
+                    <div class="movie-detail-meta">
+                        <span>${movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A'}</span>
+                        <span>${movie.runtime ? formattedRuntime : 'N/A'}</span>
+                    </div>
+                    <div class="movie-detail-genres">
+                        ${movie.genres.map(genre => `<span class="genre-tag">${genre.name}</span>`).join('')}
+                    </div>
+                    <p class="movie-detail-description">${movie.overview || 'No description available.'}</p>
+                    <p><strong>Director:</strong> ${directors || 'Not available'}</p>
+                    <button class="watchlist-btn ${inWatchlist ? 'in-watchlist' : ''}" id="modal-watchlist-btn">
+                        <i class="fas ${inWatchlist ? 'fa-check' : 'fa-plus'}"></i>
+                        ${inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                    </button>
+                </div>
+            </div>
+            <div class="detail-section">
+                <h3>Cast</h3>
+                <div class="cast-grid">
+                    ${movie.credits.cast.slice(0, 6).map(person => `
+                        <div class="cast-card">
+                            <img src="${person.profile_path ? `${IMAGE_BASE_URL}w185${person.profile_path}` : 'https://via.placeholder.com/185x278?text=No+Image'}" alt="${person.name}" class="cast-photo">
+                            <div class="cast-name">${person.name}</div>
+                            <div class="cast-character">${person.character}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
