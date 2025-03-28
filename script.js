@@ -308,3 +308,16 @@ function toggleWatchlist(movie) {
     // Save to localStorage
     saveWatchlist();
 }
+
+// Save watchlist to localStorage
+function saveWatchlist() {
+    localStorage.setItem('movie-finder-watchlist', JSON.stringify(watchlist));
+}
+
+// Load watchlist from localStorage
+function loadWatchlist() {
+    const saved = localStorage.getItem('movie-finder-watchlist');
+    if (saved) {
+        watchlist = JSON.parse(saved);
+    }
+}
