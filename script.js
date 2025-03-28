@@ -377,4 +377,26 @@ async function openMovieDetail(movieId) {
                 </div>
             </div>
         `;
+       
+        // Add event listener to watchlist button in modal
+        document.getElementById('modal-watchlist-btn').addEventListener('click', () => {
+            toggleWatchlist(movie);
+            const button = document.getElementById('modal-watchlist-btn');
+            if (button.classList.contains('in-watchlist')) {
+                button.classList.remove('in-watchlist');
+                button.innerHTML = '<i class="fas fa-plus"></i> Add to Watchlist';
+            } else {
+                button.classList.add('in-watchlist');
+                button.innerHTML = '<i class="fas fa-check"></i> In Watchlist';
+            }
+            
+            // Update movie cards if they exist
+            renderMovies();
+        });
         
+        // Show modal
+        movieModal.style.display = 'block';
+    } catch (error) {
+        console.error('Error loading movie details:', error);
+    }
+}
