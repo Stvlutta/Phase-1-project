@@ -426,3 +426,45 @@ function goToNextPage() {
         loadPageData();
     }
 }
+
+// Load page data based on current filters/search
+async function loadPageData() {
+    try {
+        let url;
+        
+        if (currentSearchQuery) {
+            // Search query
+            url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentSearchQuery)}&page=${currentPage}`;
+        } else if (currentGenre || currentYear || currentRating) {
+            // Filtered discover
+            url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${currentPage}&sort_by=popularity.desc`;
+            
+            if (currentGenre) {
+                url += `&with_genres=${currentGenre}`;
+            }
+            
+            if (currentYear) {
+                url += `&primary_release_year=${currentYear}`;
+            }
+            
+            if (currentRating) {
+                url += `&vote_average.gte=${currentRating}`;
+            }
+        } else {
+            // Default trending
+            url = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${currentPage}`;
+        }
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        movies = data.results;
+        renderMovies();
+        updatePagination();
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+        console.error('Error loading page data:', error);
+    }
+}
